@@ -38,7 +38,7 @@ const Page = () => {
       setCustomerData(prevData => ({ ...prevData, fullName: name, email: email }));
     } catch (error) {
       console.error("Error fetching user details", error);
-      router.push("/login");
+      // router.push("/login");
     }
   }, [router]);
   const handleOrderSubmit = async (e) => {
