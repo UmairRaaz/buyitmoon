@@ -23,7 +23,8 @@ const ProductComponent = ({
     setWishlist((prev) => [...prev, productToAdd]);
     toast("Added To WishList", {icon : '❤️'})
   };
-  window.localStorage.setItem("wishlist", JSON.stringify(wishlist))
+  // window.localStorage.setItem("wishlist", JSON.stringify(wishlist))
+  localStorage.setItem("wishlist", JSON.stringify(wishlist))
   const handleAddToCart = (id) => {
     const productToAdd = productData.find(
       (product) => product._id === productId

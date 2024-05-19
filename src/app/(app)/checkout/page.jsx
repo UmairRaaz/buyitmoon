@@ -49,8 +49,9 @@ const Page = () => {
   }
   useEffect(()=>{
     userDetails()
-    window.localStorage.setItem("cartItem", JSON.stringify(cartItem))
-  }, [])
+    // window.localStorage.setItem("cartItem", JSON.stringify(cartItem))
+    localStorage.setItem("cartItem", JSON.stringify(cartItem))
+  }, [cartItem, user])
 
   
   return (

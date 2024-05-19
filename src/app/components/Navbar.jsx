@@ -6,6 +6,7 @@ import {
   Typography,
   IconButton,
 } from "@material-tailwind/react";
+
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import axios from "axios";
@@ -14,11 +15,13 @@ import ProductContext from "@/context/ProductContext";
 import { IoCartSharp } from "react-icons/io5";
 import { IoIosHeart } from "react-icons/io";
 function NavList() {
+  
   const router = useRouter()
   const { wishlist, cart } = useContext(ProductContext)
   const logoutHandler = async () => {
     const response = await axios.get("/api/logout")
-    window.location.reload();
+    // window.location.reload();
+    router.refresh()
 
   }
   return (
