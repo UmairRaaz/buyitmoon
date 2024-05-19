@@ -12,8 +12,8 @@ const Page = () => {
   const router = useRouter()
   const { cartItem } = useContext(ProductContext);
   const [customerData, setCustomerData] = useState({
-    fullName : "",
-    email : "",
+    fullName: "",
+    email: "",
     phoneNumber: "",
     address: ""
   })
@@ -25,35 +25,43 @@ const Page = () => {
     // Multiply the price by the quantity for each item and add to the total
     return total + 1 * item.quantity;
   }, 0);
-  
-  const userDetails = async () => {
-      const userData = await axios.get("/api/isAdmin")
-      console.log(userData)
-      if(!userData.data.success){
-       return router.push("/login")
+
+
+  const userDetails = useCallback(async () => {
+    try {
+      const userData = await axios.get("/api/isAdmin");
+      console.log(userData);
+      if (!userData.data.success) {
+        return router.push("/login");
       }
-      const {name, email} = userData.data.data
-      setCustomerData({ ...customerData, fullName: name, email: email });
-  }
+      const { name, email } = userData.data.data;
+      setCustomerData(prevData => ({ ...prevData, fullName: name, email: email }));
+    } catch (error) {
+      console.error("Error fetching user details", error);
+      router.push("/login");
+    }
+  }, [router]);
   const handleOrderSubmit = async (e) => {
     e.preventDefault()
-    const response = await axios.post("/api/order", {customerData, cartItem, totalPrice})
+    const response = await axios.post("/api/order", { customerData, cartItem, totalPrice })
     console.log(response)
-    if(response.data.success){
-      toast("Order Placed", {icon : '😊'})
+    if (response.data.success) {
+      toast("Order Placed", { icon: '😊' })
       localStorage.removeItem("wishlist");
       localStorage.removeItem("cart");
       localStorage.removeItem("cartItem");
       router.push("/ordercomplete")
     }
   }
-  useEffect(()=>{
-    userDetails()
-    // window.localStorage.setItem("cartItem", JSON.stringify(cartItem))
-    localStorage.setItem("cartItem", JSON.stringify(cartItem))
-  }, [cartItem])
+  useEffect(() => {
+    userDetails();
+  }, [userDetails]);
 
-  
+  useEffect(() => {
+    localStorage.setItem("cartItem", JSON.stringify(cartItem));
+  }, [cartItem]);
+
+
   return (
     <div className="mt-10 my-10 w-[80%] mx-auto text-gray-700">
       <div className="gap-24 flex md:flex-row flex-col">
@@ -73,7 +81,7 @@ const Page = () => {
                   id="full-name"
                   type="text"
                   value={customerData.fullName}
-                  onChange={(e) => setCustomerData({...customerData, name : e.target.value})}
+                  onChange={(e) => setCustomerData({ ...customerData, name: e.target.value })}
                   placeholder="Full Name"
                 />
               </div>
@@ -89,7 +97,7 @@ const Page = () => {
                   id="email"
                   type="email"
                   value={customerData.email}
-                  onChange={(e) => setCustomerData({...customerData, email : e.target.value})}
+                  onChange={(e) => setCustomerData({ ...customerData, email: e.target.value })}
                   placeholder="Email Address"
                 />
               </div>
@@ -105,7 +113,7 @@ const Page = () => {
                   id="phone"
                   type="tel"
                   value={customerData.phoneNumber}
-                  onChange={(e) => setCustomerData({...customerData, phoneNumber : e.target.value})}
+                  onChange={(e) => setCustomerData({ ...customerData, phoneNumber: e.target.value })}
                   placeholder="Phone Number"
                 />
               </div>
@@ -121,7 +129,7 @@ const Page = () => {
                   id="address"
                   placeholder="Address"
                   value={customerData.address}
-                  onChange={(e) => setCustomerData({...customerData, address : e.target.value})}
+                  onChange={(e) => setCustomerData({ ...customerData, address: e.target.value })}
                 ></textarea>
                 <button type="submit" className="bg-gray-700 text-white rounded-2xl mt-8 px-4 py-1">
                   Place Order
