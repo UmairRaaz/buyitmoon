@@ -35,7 +35,7 @@ const Page = () => {
         return router.push("/login");
       }
       const { name, email } = userData.data.data;
-      setCustomerData(prevData => ({ ...prevData, fullName: name, email: email }));
+      // setCustomerData(prevData => ({ ...prevData, fullName: name, email: email }));
     } catch (error) {
       console.error("Error fetching user details", error);
       // router.push("/login");
