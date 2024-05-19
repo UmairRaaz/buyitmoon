@@ -51,7 +51,7 @@ const Page = () => {
     userDetails()
     // window.localStorage.setItem("cartItem", JSON.stringify(cartItem))
     localStorage.setItem("cartItem", JSON.stringify(cartItem))
-  }, [cartItem, user])
+  }, [cartItem])
 
   
   return (
