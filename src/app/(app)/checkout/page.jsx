@@ -35,7 +35,7 @@ const Page = () => {
         return router.push("/login");
       }
       const { name, email } = userData.data.data;
-      // setCustomerData(prevData => ({ ...prevData, fullName: name, email: email }));
+      setCustomerData(prevData => ({ ...prevData, fullName: name, email: email }));
     } catch (error) {
       console.error("Error fetching user details", error);
       // router.push("/login");
@@ -78,10 +78,10 @@ const Page = () => {
                 </label>
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="full-name"
+                  id="fullName"
                   type="text"
                   value={customerData.fullName}
-                  onChange={(e) => setCustomerData({ ...customerData, name: e.target.value })}
+                  onChange={(e) => setCustomerData({ ...customerData, fullName: e.target.value })}
                   placeholder="Full Name"
                 />
               </div>
