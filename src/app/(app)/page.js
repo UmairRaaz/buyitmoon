@@ -1,6 +1,7 @@
 'use client'
 import MainPage from "../components/MainPage";
-
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import ProductContext from '@/context/ProductContext'

@@ -6,7 +6,7 @@ import {
   Typography,
   IconButton,
 } from "@material-tailwind/react";
-
+import { IoIosHome } from "react-icons/io";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import axios from "axios";
@@ -25,24 +25,44 @@ function NavList() {
 
   }
   return (
-    <div className="my-2 flex flex-col gap-2 text-black lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-4">
-      <Link href="/products"
-        className="p-1 font-medium text-md"
+    <div className="my-0  flex flex-col gap-2 text-black lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-4">
+      <Link href="/"
+        className="p-1 font-medium text-md border-b border-r-0 md:border-b-0 md:border-r border-gray-700 px-4 py-2 md:py-0 uppercase"
       >
-        Products
+        <IoIosHome size={25} className="text-blue-500"/>
       </Link>
 
       <Link
-        href="/wishlist"
-        className="p-1 font-medium flex gap-1  "
+        href="/"
+        className="p-1 font-medium flex gap-1  border-b md:border-b-0 md:border-r border-gray-700 px-4 py-2  md:py-0 uppercase "
       >
-        <IoIosHeart size={25} />
-        <span className="bg-red-200 text-white rounded-full px-[8px] py-[1px]">{wishlist.length}</span>
+        Why we are
+
+      </Link>
+      <Link
+        href="/"
+        className="p-1 font-medium flex gap-1 border-b md:border-b-0 md:border-r border-gray-700 px-4 py-2  md:py-0 uppercase "
+      >
+        Problems & Solution
+
+      </Link>
+      <Link
+        href="/products"
+        className="p-1 font-medium flex gap-1  border-b md:border-b-0 md:border-r border-gray-700 px-4 py-2 md:py-0 uppercase"
+      >
+        Products
+
+      </Link>
+      <Link
+        href="/contactus"
+        className="p-1 font-medium flex gap-1  border-b md:border-b-0 md:border-r border-gray-700 px-4 py-2 md:py-0 uppercase"
+      >
+        Contact Us
 
       </Link>
       <Link
         href="/cart"
-        className="p-1 font-medium flex gap-1 "
+        className="p-1 font-medium flex gap-1 border-b md:border-b-0 md:border-r border-gray-700 px-4 uppercase py-2  md:py-0"
       >
         <IoCartSharp size={25} />
         <span className="bg-red-200 text-white rounded-full px-[8px] py-[1px]">{cart.length}</span>
@@ -72,12 +92,12 @@ export function NavbarSimple() {
   }, []);
 
   return (
-    <div className="md:px-24 md:py-4">
-      <Navbar className="-xl px-6 py-3 ">
+    <div className="fixed top-0 left-0 z-50 w-full bg-white">
+      <Navbar className="px-6 pl-10 py-3 rounded-none ">
         <div className="flex items-center justify-between text-blue-gray-900">
           <Link
             href="/"
-            className="mr-4 cursor-pointer py-1.5 font-bold"
+            className="mr-4 cursor-pointer py-1.5 font-bold text-xl"
           >
             BuyIt
           </Link>

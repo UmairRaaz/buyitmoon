@@ -3,6 +3,7 @@ import "../globals.css";
 import NavbarSimple from "../components/Navbar";
 import ProductContextProvider from "@/context/ProductContextProvider";
 import { Toaster } from "react-hot-toast";
+import Footer from "../components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
           <Toaster position="bottom-center" />
             {children}
           </div>
+          <Footer/>
         </ProductContextProvider>
       </body>
     </html>

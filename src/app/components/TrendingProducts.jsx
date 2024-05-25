@@ -21,7 +21,7 @@ const TrendingProducts = () => {
 
   return (
     <div className="min-h-[50vh] w-[80%] mx-auto ">
-      <h1 className='text-3xl text-gray-700  my-4 font-semibold text-center'><span className='border-b-2 pb-2 border-gray-500 mb-8 '>Most Sold Items</span></h1>
+      <h1 className='text-3xl text-gray-700  my-4 font-semibold text-center'><span className='border-b-2 pb-2 border-gray-500 mb-8 '>Products</span></h1>
       <div className='grid grid-cols-1 mt-8 place-items-center place-content-center  gap-y-10 md:grid-cols-2 lg:grid-cols-3'>
         {mostSelled.length > 0 && mostSelled.map((product) => (
           <ProductComponent
