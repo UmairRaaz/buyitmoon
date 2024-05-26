@@ -3,22 +3,11 @@ import { Product } from "@/models/productModel";
 import { NextRequest, NextResponse } from "next/server";
 
 connect()
-export async function POST(req) {
-    const { params } = await req.json();
-    const { startDate, endDate } = params;
+export async function GET(req) {
     try {
-        const products = await Product.aggregate([
-            {
-                $match: {
-                    createdAt: {
-                        $gte: new Date(startDate),
-                        $lte: new Date(endDate) 
-                    }
-                }
-            }
-        ]);
-        // const products = await Product.find({})
-        // console.log(data)
+       
+        const products = await Product.find({})
+        console.log(products)
         if (!products) {
             return NextResponse.json({ message: "product doesnot found", products: [], success: false, status: 400 })
         }

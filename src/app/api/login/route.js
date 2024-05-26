@@ -8,11 +8,11 @@ connect()
 export async function POST(NextRequest) {
     try {
         const body = await NextRequest.json()
-        console.log(body)
+        // console.log(body)
         const { email, password } = body
-        console.log("email, password", email, password)
+        // console.log("email, password", email, password)
         const user = await Customer.findOne({ email })
-        console.log("user", user)
+        // console.log("user", user)
         if (!user) {
             return NextResponse.json({ message: "email not found", success: false }, { status: 400 })
         }

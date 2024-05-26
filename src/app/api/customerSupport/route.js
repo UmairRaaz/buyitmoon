@@ -6,9 +6,9 @@ export async function POST(request) {
   try {
     await connect();
     const req = await request.json();
-    console.log(req);
+    // console.log(req);
     const support = await Support.create(req)
-    console.log(support)
+    // console.log(support)
     return NextResponse.json(
       {
         data : support,

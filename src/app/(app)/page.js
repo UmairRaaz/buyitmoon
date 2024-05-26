@@ -15,7 +15,7 @@ export default function Home() {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const response = await axios.get("/api/getAllProducts");
+        const response = await axios.get("/api/getProductsForCustomer");
         setProductData(response.data.products);
         // window.localStorage.setItem("products", JSON.stringify(response.data.products))
         localStorage.setItem("products", JSON.stringify(response.data.products))

@@ -8,7 +8,7 @@ export async function DELETE(request, { params }){
         await connect()
         const id = params.id
         const response = await Product.findOneAndDelete({_id : id})
-        console.log(response)
+        // console.log(response)
         return NextResponse.json(
             {
               success: true,

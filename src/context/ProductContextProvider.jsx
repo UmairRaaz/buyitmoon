@@ -12,6 +12,7 @@ const ProductContextProvider = ({ children }) => {
     const [wishlist, setWishlist] = useState([])
     const [cart, setCart] = useState([])
     const [cartItem, setCartItem] = useState([])
+    const [isLoggedIn, setisLoggedIn] = useState(false)
 
     useEffect(() => {
         const storedProducts = JSON.parse(localStorage.getItem("products"));
@@ -26,7 +27,7 @@ const ProductContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <ProductContext.Provider value={{ productData, setProductData, setWishlist, wishlist, cart, setCart, cartItem, setCartItem }}>
+        <ProductContext.Provider value={{ productData, setProductData, setWishlist, wishlist, cart, setCart, cartItem, setCartItem, isLoggedIn, setisLoggedIn }}>
             {children}
         </ProductContext.Provider>
     )

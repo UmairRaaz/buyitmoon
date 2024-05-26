@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Navbar,
   Collapse,
@@ -15,32 +15,43 @@ import ProductContext from "@/context/ProductContext";
 import { IoCartSharp } from "react-icons/io5";
 import { IoIosHeart } from "react-icons/io";
 function NavList() {
-  
+  const [isLoggedIn, setisLoggedIn] = useState(false)
   const router = useRouter()
   const { wishlist, cart } = useContext(ProductContext)
+  const getCookies = async () => {
+    const response = await axios.get("/api/isAdmin")
+    console.log("cookie response", response.data.data)
+    if (response.data.data) {
+      setisLoggedIn(true)
+    } else {
+      false
+    }
+  }
+  useEffect(() => {
+    getCookies()
+  }, [])
   const logoutHandler = async () => {
     const response = await axios.get("/api/logout")
-    // window.location.reload();
-    router.refresh()
-
+    router.replace("/")
+    window.location.reload(true);
   }
   return (
     <div className="my-0  flex flex-col gap-2 text-black lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-4">
       <Link href="/"
         className="p-1 font-medium text-md border-b border-r-0 md:border-b-0 md:border-r border-gray-700 px-4 py-2 md:py-0 uppercase"
       >
-        <IoIosHome size={25} className="text-blue-500"/>
+        <IoIosHome size={25} className="text-blue-500" />
       </Link>
 
       <Link
-        href="/"
+        href="/why-us"
         className="p-1 font-medium flex gap-1  border-b md:border-b-0 md:border-r border-gray-700 px-4 py-2  md:py-0 uppercase "
       >
         Why we are
 
       </Link>
       <Link
-        href="/"
+        href="/problems-solutions"
         className="p-1 font-medium flex gap-1 border-b md:border-b-0 md:border-r border-gray-700 px-4 py-2  md:py-0 uppercase "
       >
         Problems & Solution
@@ -67,12 +78,21 @@ function NavList() {
         <IoCartSharp size={25} />
         <span className="bg-red-200 text-white rounded-full px-[8px] py-[1px]">{cart.length}</span>
       </Link>
-      <button
-        onClick={logoutHandler}
+      {isLoggedIn ? (
+        <button
+          onClick={logoutHandler}
+          className="p-1 font-medium text-md border px-4 py-1 border-gray-700 rounded-full"
+        >
+          Logout
+        </button>
+      ) : (<button
         className="p-1 font-medium text-md border px-4 py-1 border-gray-700 rounded-full"
       >
-        Logout
-      </button>
+        <Link href={"/login"}>
+          Login
+        </Link>
+      </button>)}
+
     </div>
   );
 }

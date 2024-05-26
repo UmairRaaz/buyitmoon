@@ -1,16 +1,19 @@
 "use client";
 import ProductContext from "@/context/ProductContext";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import CartProducts from "../../components/CartProducts";
 import Image from "next/image";
 const WishListPage = () => {
   const { cart, cartItem } = useContext(ProductContext);
   console.log(cartItem);
+
   const totalPrice = cartItem.reduce((total, item) => {
     return total + (item.price * item.quantity);
   }, 0);
-
+  useEffect(() => {
+    localStorage.setItem("cartItem", JSON.stringify(cartItem));
+  }, [cartItem]);
   if (cart.length <= 0) {
     return (
       <div className="h-screen w-full flex items-center flex-col  ">
@@ -22,7 +25,7 @@ const WishListPage = () => {
     )
   }
   return (
-    <div className="mt-10 w-[80%] mx-auto">
+    <div className="mt-32 w-[80%] mx-auto">
       <div className=" flex md:flex-row flex-col gap-8">
         <div className="md:w-[65%] bg-[#FFF7F1] rounded-md shadow-xl p-5">
           {cart.map((cartItem, index) => (

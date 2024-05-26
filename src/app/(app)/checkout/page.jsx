@@ -10,18 +10,20 @@ import toast from "react-hot-toast";
 
 const Page = () => {
   const router = useRouter()
-  const { cartItem } = useContext(ProductContext);
+  // const { cartItem } = useContext(ProductContext);
+  const cartItem = JSON.parse(localStorage.getItem("cartItem"))
+  console.log(cartItem)
   const [customerData, setCustomerData] = useState({
     fullName: "",
     email: "",
     phoneNumber: "",
     address: ""
   })
-  const totalPrice = cartItem.reduce((total, item) => {
+  const totalPrice = cartItem?.reduce((total, item) => {
     // Multiply the price by the quantity for each item and add to the total
     return total + item.price * item.quantity;
   }, 0);
-  const totalProducts = cartItem.reduce((total, item) => {
+  const totalProducts = cartItem?.reduce((total, item) => {
     // Multiply the price by the quantity for each item and add to the total
     return total + 1 * item.quantity;
   }, 0);
@@ -50,12 +52,13 @@ const Page = () => {
       localStorage.removeItem("wishlist");
       localStorage.removeItem("cart");
       localStorage.removeItem("cartItem");
-      router.push("/ordercomplete")
+      router.replace("/ordercomplete")
+      
     }
   }
   useEffect(() => {
     userDetails();
-  }, [userDetails]);
+  }, [userDetails, totalPrice, totalProducts]);
 
   useEffect(() => {
     localStorage.setItem("cartItem", JSON.stringify(cartItem));
@@ -63,7 +66,7 @@ const Page = () => {
 
 
   return (
-    <div className="mt-10 my-10 w-[80%] mx-auto text-gray-700">
+    <div className="mt-32 my-10 w-[80%] mx-auto text-gray-700">
       <div className="gap-24 flex md:flex-row flex-col">
         <div className="md:w-[50%] bg-[#FFF7F1] rouded-md shadow-xl border p-5">
           <div className="w-full">
@@ -141,7 +144,7 @@ const Page = () => {
         <div className="md:w-[50%] border bg-[#FFF7F1] px-8 py-4">
           <h1 className="text-xl font-semibold mb-4">Order Summary</h1>
           <div className="flex flex-col gap-4">
-            {cartItem.map((cart) => (
+            {cartItem?.map((cart) => (
               <div
                 key={cart.id}
                 className="flex px-4 py-1 items-center justify-between border-b border-gray-400 pb-4"
@@ -174,11 +177,11 @@ const Page = () => {
             </div>
             <div className="w-full flex justify-between items-center mt-4">
               <span>Total Products</span>
-              <span className="font-semibold">{totalProducts}</span>
+              <span className="font-semibold">{totalProducts || 0}</span>
             </div>
             <div className="w-full flex justify-between items-center mt-4">
               <span>Total</span>
-              <span className="font-semibold">{totalPrice}</span>
+              <span className="font-semibold">{totalPrice || 0}</span>
             </div>
           </div>
         </div>

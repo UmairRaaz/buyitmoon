@@ -1,11 +1,11 @@
 'use client'
+import ProductContext from "@/context/ProductContext";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 const LoginPage = () => {
-
   const router = useRouter()
   const [userNotFound, setuserNotFound] = useState(false)
   const [loginLoading, setloginLoading] = useState(false)
@@ -28,12 +28,12 @@ const LoginPage = () => {
           password: "",
         })
         setuserNotFound(false)
-        router.push("/")
+        router.push("/checkout")
       }
     } catch (error) {
       console.log("error while login", error)
-      if (!error.response.data.success) {
-        console.log(!error.response.success)
+      if (error) {
+        console.log(error)
         setuserNotFound(true)
         setloginLoading(false)
         setloginUserData({

@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 const Thankyou = () => {
+ 
   return (
-    <div className="h-screen w-full flex items-center flex-col ">
+    <div className="h-screen w-full flex mt-32 items-center flex-col ">
       <div className="max-w-4xl mx-auto  flex items-center justify-center flex-col gap-6">
         <Image src={"/thankyou.png"} width={300} height={300} alt="image" />
         <h1 className="text-2xl md:text-5xl text-gray-700 font-bold">Thankyou, enjoy!</h1>

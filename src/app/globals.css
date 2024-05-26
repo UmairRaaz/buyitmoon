@@ -3,21 +3,52 @@
 @tailwind utilities;
 
 .blur-container {
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    background: hsla(0, 0%, 100%, .3);
-    border: 1px solid hsla(0, 0%, 100%, .3);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, .1); 
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: hsla(0, 0%, 100%, .3);
+  border: 1px solid hsla(0, 0%, 100%, .3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, .1);
 }
 
 .slider-container {
-    width: 100%;
-    height: 100vh; /* Full height of the viewport */
-    /* position: relative; */
-  }
-  
-  .slider-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image covers the container without stretching */
-  }
+  width: 100%;
+  height: 100vh;
+  /* Full height of the viewport */
+  /* position: relative; */
+}
+
+.slider-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Ensures the image covers the container without stretching */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a {
+  cursor: pointer;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.pagination li a:hover {
+  background-color: #ddd;
+}
+
+.pagination .active a {
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #007bff;
+}

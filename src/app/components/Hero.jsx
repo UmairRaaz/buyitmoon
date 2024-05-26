@@ -16,14 +16,14 @@ const Hero = () => {
     autoplaySpeed: 3000,
   };
   return (
-    <Slider {...settings} className="mt-14">
-      <div className="h-[40vh] w-full">
+    <Slider {...settings} className="mt-14 overflow-hidden">
+      <div className="h-[60vh] w-full overflow-hidden">
         <Image  src="/bannerOne.jpg" className="h-full w-full " width={500} height={300} alt="Image 1" />
       </div>
-      <div className="h-[40vh] w-full">
+      <div className="h-[60vh] w-full">
         <Image src="/bannerTwo.jpg" className="h-full w-full " width={500} height={300} alt="Image 2" />
       </div>
-      <div className="h-[40vh] w-full">
+      <div className="h-[60vh] w-full">
         <Image src="/bannerThree.jpg" className="h-full w-full " width={500} height={300} alt="Image 3" />
       </div>
       {/* Add more slides as needed */}
