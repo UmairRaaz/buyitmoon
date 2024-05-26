@@ -28,7 +28,7 @@ const LoginPage = () => {
           password: "",
         })
         setuserNotFound(false)
-        router.push("/checkout")
+        router.back()
       }
     } catch (error) {
       console.log("error while login", error)

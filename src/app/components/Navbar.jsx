@@ -17,10 +17,12 @@ import { IoIosHeart } from "react-icons/io";
 function NavList() {
   const [isLoggedIn, setisLoggedIn] = useState(false)
   const router = useRouter()
+  router.beforeHistoryChange = (url) => {
+    console.log('Before history change:', url);
+  };
   const { wishlist, cart } = useContext(ProductContext)
   const getCookies = async () => {
     const response = await axios.get("/api/isAdmin")
-    console.log("cookie response", response.data.data)
     if (response.data.data) {
       setisLoggedIn(true)
     } else {
