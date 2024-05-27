@@ -7,6 +7,7 @@ import 'react-date-range/dist/theme/default.css';
 import { DateRangePicker } from 'react-date-range';
 import Modal from 'react-modal';
 import ReactPaginate from 'react-paginate';
+import { useRouter } from 'next/navigation';
 
 const AllProductsPage = () => {
     const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ const AllProductsPage = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 5;
-
+    const router = useRouter()
     const getProducts = async () => {
         try {
             const response = await axios.post("/api/getAllProducts", {
@@ -80,6 +81,9 @@ const AllProductsPage = () => {
             }
         }
     };
+    const handleEdit = async (id) => {
+        router.push(`/admin/product/edit/${id}`)
+    };
 
     return (
         <div className="p-4">
@@ -138,14 +142,25 @@ const AllProductsPage = () => {
                                     <p className="text-gray-700">${product.productPrice}</p>
                                 </div>
                                 {/* Delete Button */}
-                                <div>
-                                    <button
-                                        type="button"
-                                        onClick={() => handleDelete(product._id)}
-                                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                                    >
-                                        Delete
-                                    </button>
+                                <div className='flex gap-2'>
+                                    <div >
+                                        <button
+                                            type="button"
+                                            onClick={() => handleDelete(product._id)}
+                                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleEdit(product._id)}
+                                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                        >
+                                            Edit
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         ))}

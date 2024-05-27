@@ -64,9 +64,9 @@ const UploadProduct = () => {
     }
   };
   return (
-    <div className="w-full rounded-md shadow-lg ">
+    <div className="max-w-6xl min-h-[80vh] rounded-md mx-auto shadow-lg ">
       <h1 className="text-2xl text-gray-800 px-4 py-4 m-4">Add Product</h1>
-      <div className="px-8">
+      <div className=" px-8">
         <form
           onSubmit={handleProductSave}
           className="py-4 flex md:flex-row flex-col"

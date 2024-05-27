@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 const AdminPage = () => {
   const router = useRouter()
   const [loading, setloading] = useState(true)
-  const [compnentToShow, setCompnentToShow] = useState("upload");
   const [isAdmin, setisAdmin] = useState(false);
   const getUserData = async () => {
     try {
@@ -38,7 +37,7 @@ const AdminPage = () => {
         {loading && "Loading"}
       </div>
       <div className={`bg-white shadow-lg ${isAdmin ? "block" : "hidden"}`}>
-        <UploadProduct />
+        <UploadProduct  />
       </div>
     </>
   );

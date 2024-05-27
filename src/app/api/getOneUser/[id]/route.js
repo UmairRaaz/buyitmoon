@@ -6,7 +6,6 @@ connect();
 
 export async function GET(req, {params}) {
     try {
-        console.log("working");
         const id = params.id;
         const user = await Customer.findById(id);
         if (!user) {

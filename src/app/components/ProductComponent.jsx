@@ -18,7 +18,7 @@ const ProductComponent = ({
 
   const handleWishList = (id) => {
     const productToAdd = productData.find(
-      (product) => product._id === productId
+      (product) => product?._id === productId
     );
     setWishlist((prev) => [...prev, productToAdd]);
     toast("Added To WishList", {icon : '❤️'})
@@ -27,25 +27,25 @@ const ProductComponent = ({
   localStorage.setItem("wishlist", JSON.stringify(wishlist))
   const handleAddToCart = (id) => {
     const productToAdd = productData.find(
-      (product) => product._id === productId
+      (product) => product?._id === productId
     );
     setCart((prev) => [...prev, productToAdd]);
     toast("Added To Cart", {icon : '🛒'})
   };
   const handleRemoveWishList = (id) => {
-    setWishlist((prev) => prev.filter((product) => product._id !== id));
+    setWishlist((prev) => prev.filter((product) => product?._id !== id));
     toast("Removed From WishList", {icon : '❌'})
   };
 
   const handleRemoveFromCart = (id) => {
-    setCart((prev) => prev.filter((product) => product._id !== id));
+    setCart((prev) => prev.filter((product) => product?._id !== id));
   };
   window.localStorage.setItem("cart", JSON.stringify(cart))
   const isInWishlist = wishlist.some(
-    (wishProduct) => wishProduct._id === productId
+    (wishProduct) => wishProduct?._id === productId
   );
   const isInCartList = cart.some(
-    (wishProduct) => wishProduct._id === productId
+    (wishProduct) => wishProduct?._id === productId
   );
   return (
     <div className=" w-64 shadow-xl rounded-2xl flex flex-col">

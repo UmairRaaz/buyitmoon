@@ -28,30 +28,30 @@ const CartProducts = ({
 
   const handleWishList = (id) => {
     const productToAdd = productData.find(
-      (product) => product._id === productId
+      (product) => product?._id === productId
     );
     setWishlist((prev) => [...prev, productToAdd]);
     toast("Added To WishList", { icon: '❤️' })
 
   };
   const handleRemoveWishList = (id) => {
-    setWishlist((prev) => prev.filter((product) => product._id !== id));
+    setWishlist((prev) => prev.filter((product) => product?._id !== id));
     toast("Removed From WishList", { icon: '❌' })
   };
 
   const handleRemoveFromCart = (id) => {
-    setCart((prev) => prev.filter((product) => product._id !== id));
+    setCart((prev) => prev.filter((product) => product?._id !== id));
     setCartItem((prev) => prev.filter((product) => product.id !== id));
     toast("Removed From Cart", { icon: '❌' })
   };
   const isInWishlist = wishlist.some(
-    (wishProduct) => wishProduct._id === productId
+    (wishProduct) => wishProduct?._id === productId
   );
   useEffect(() => {
     const initialCartItem = [];
     cart.forEach((cartProduct) => {
       initialCartItem.push({
-        id: cartProduct._id,
+        id: cartProduct?._id,
         price: cartProduct.productPrice,
         name: cartProduct.productName,
         image: cartProduct.productImage,
