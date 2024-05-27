@@ -6,6 +6,7 @@ import { TbTagStarred } from "react-icons/tb";
 import ProductContext from "@/context/ProductContext";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 const ProductComponent = ({
   productId,
   productImage,
@@ -15,13 +16,13 @@ const ProductComponent = ({
 }) => {
   const { productData, wishlist, setWishlist, cart, setCart } =
     useContext(ProductContext);
-
+  const router = useRouter()
   const handleWishList = (id) => {
     const productToAdd = productData.find(
       (product) => product?._id === productId
     );
     setWishlist((prev) => [...prev, productToAdd]);
-    toast("Added To WishList", {icon : '❤️'})
+    toast("Added To WishList", { icon: '❤️' })
   };
   // window.localStorage.setItem("wishlist", JSON.stringify(wishlist))
   localStorage.setItem("wishlist", JSON.stringify(wishlist))
@@ -30,11 +31,11 @@ const ProductComponent = ({
       (product) => product?._id === productId
     );
     setCart((prev) => [...prev, productToAdd]);
-    toast("Added To Cart", {icon : '🛒'})
+    toast("Added To Cart", { icon: '🛒' })
   };
   const handleRemoveWishList = (id) => {
     setWishlist((prev) => prev.filter((product) => product?._id !== id));
-    toast("Removed From WishList", {icon : '❌'})
+    toast("Removed From WishList", { icon: '❌' })
   };
 
   const handleRemoveFromCart = (id) => {
@@ -48,7 +49,9 @@ const ProductComponent = ({
     (wishProduct) => wishProduct?._id === productId
   );
   return (
-    <div className=" w-64 shadow-xl rounded-2xl flex flex-col">
+    <div className=" w-64 shadow-xl rounded-2xl flex flex-col"
+      onClick={() => router.push(`/product/${productId}`)}
+    >
       <div className="w-full">
         <Image
           src={productImage}
