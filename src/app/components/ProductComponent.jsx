@@ -50,9 +50,11 @@ const ProductComponent = ({
   );
   return (
     <div className=" w-64 shadow-xl rounded-2xl flex flex-col cursor-pointer"
-      onClick={() => router.push(`/product/${productId}`)}
+      
     >
-      <div className="w-full">
+      <div
+      onClick={() => router.push(`/product/${productId}`)}
+      className="w-full">
         <Image
           src={productImage}
           alt="product-image"
