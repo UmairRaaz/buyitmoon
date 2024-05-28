@@ -25,7 +25,7 @@ const ProductDetails = ({ params }) => {
 
     const handleWishList = (id) => {
         const productToAdd = productData.find(
-            (prod) => prod?._id === product.productId
+            (prod) => prod?._id === product._id
         );
         setWishlist((prev) => [...prev, productToAdd]);
         toast("Added To WishList", { icon: '❤️' })
@@ -34,7 +34,7 @@ const ProductDetails = ({ params }) => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist))
     const handleAddToCart = (id) => {
         const productToAdd = productData.find(
-            (prod) => prod?._id === product.productId
+            (prod) => prod?._id === product._id
         );
         setCart((prev) => [...prev, productToAdd]);
         toast("Added To Cart", { icon: '🛒' })
@@ -46,17 +46,14 @@ const ProductDetails = ({ params }) => {
 
     window.localStorage.setItem("cart", JSON.stringify(cart))
     const isInWishlist = wishlist.some(
-        (prod) => prod?._id === product.productId
+        (prod) => prod?._id === product._id
     );
     const isInCartList = cart.some(
-        (prod) => prod?._id === product.productId
+        (prod) => prod?._id === product._id
     );
 
 
-    const handleFirstSelectionChange = (e) => {
-        setFirstSelection(e.target.value);
-        setSecondSelection(''); // Reset the second selection when first changes
-    };
+   
     useEffect(() => {
         getProductDetails(id)
     }, [id])
@@ -85,56 +82,6 @@ const ProductDetails = ({ params }) => {
                         <span className="text-sm text-gray-700"> ({product.productRating})</span>
                     </div>
                     <div>Price : <span className="text-xl text-yellow-900">Rs {product.productPrice}</span></div>
-                    <div className="flex gap-4 items-center space-y-4">
-                        <div className="flex flex-col">
-                            <label htmlFor="first-select" className="mb-2 text-lg font-medium text-gray-700">
-                                Choose an option:
-                            </label>
-                            <select
-                                id="first-select"
-                                value={firstSelection}
-                                onChange={handleFirstSelectionChange}
-                                className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            >
-                                <option value="">Select</option>
-                                <option value="stoves">Stoves</option>
-                                <option value="plates">Plates</option>
-                            </select>
-                        </div>
-
-                        {firstSelection && (
-                            <div className="flex flex-col">
-                                <label htmlFor="second-select" className="mb-2 text-lg font-medium text-gray-700">
-                                    Choose a {firstSelection === 'stoves' ? 'type' : 'weight'}:
-                                </label>
-                                <select
-                                    id="second-select"
-                                    value={secondSelection}
-                                    onChange={(e) => setSecondSelection(e.target.value)}
-                                    className="p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                >
-                                    <option value="">Select</option>
-                                    {firstSelection === 'stoves' ? (
-                                        <>
-                                            <option value="domestic">Domestic</option>
-                                            <option value="commercial">Commercial</option>
-                                            <option value="industrialization">Industrialization</option>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <option value="10kg">10kg</option>
-                                            <option value="50kg">50kg</option>
-                                            <option value="100kg">100kg</option>
-                                            <option value="500kg">500kg</option>
-                                            <option value="1000kg">1000kg</option>
-                                            <option value="5000kg">5000kg</option>
-                                            <option value="10000kg">10000kg</option>
-                                        </>
-                                    )}
-                                </select>
-                            </div>
-                        )}
-                    </div>
                     <div className="flex justify-between mx-6  mt-4 py-4 border-t border-gray-400">
                         {isInCartList ? (
                             // If product is in cart, show go to cart

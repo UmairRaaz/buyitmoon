@@ -6,7 +6,6 @@ connect()
 export async function POST(NextRequest){
     try {
         const orderBody = await NextRequest.json()
-        console.log(orderBody)
         const sanitizedCartItems = orderBody.cartItem.map(item => {
             const {  ...rest } = item; 
             return rest; 
@@ -19,6 +18,7 @@ export async function POST(NextRequest){
             deliveryCharges: 0,
         };
         const newOrder = await Order.create(sanitizedOrderBody) 
+        console.log(newOrder)
         return NextResponse.json({message : "order placed successfully",  success : true}, {status: 200})
     } catch (error) {
         console.log(error)

@@ -49,7 +49,7 @@ const ProductComponent = ({
     (wishProduct) => wishProduct?._id === productId
   );
   return (
-    <div className=" w-64 shadow-xl rounded-2xl flex flex-col"
+    <div className=" w-64 shadow-xl rounded-2xl flex flex-col cursor-pointer"
       onClick={() => router.push(`/product/${productId}`)}
     >
       <div className="w-full">

@@ -46,14 +46,13 @@ const Page = () => {
   const handleOrderSubmit = async (e) => {
     e.preventDefault()
     const response = await axios.post("/api/order", { customerData, cartItem, totalPrice })
-    console.log(response)
+    console.log("order",response)
     if (response.data.success) {
       toast("Order Placed", { icon: '😊' })
       localStorage.removeItem("wishlist");
       localStorage.removeItem("cart");
       localStorage.removeItem("cartItem");
       router.replace("/ordercomplete")
-      
     }
   }
   useEffect(() => {

@@ -6,7 +6,8 @@ import CartProducts from "../../components/CartProducts";
 import Image from "next/image";
 const WishListPage = () => {
   const { cart, cartItem } = useContext(ProductContext);
-  console.log(cartItem);
+  console.log("cart", cart);
+  
 
   const totalPrice = cartItem.reduce((total, item) => {
     return total + (item.price * item.quantity);
@@ -31,10 +32,10 @@ const WishListPage = () => {
           {cart.map((cartItem, index) => (
             <CartProducts
               key={index}
-              productId={cartItem._id}
-              productName={cartItem.productName}
-              productImage={cartItem.productImage}
-              productPrice={cartItem.productPrice}
+              productId={cartItem?._id}
+              productName={cartItem?.productName}
+              productImage={cartItem?.productImage}
+              productPrice={cartItem?.productPrice}
             />
           ))}
         </div>
