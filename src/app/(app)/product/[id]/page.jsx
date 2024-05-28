@@ -80,6 +80,7 @@ const ProductDetails = ({ params }) => {
                         <span className="text-sm text-gray-700"> ({product.productRating})</span>
                     </div>
                     <div>Price : <span className="text-xl text-yellow-900">Rs {product.productPrice}</span></div>
+                    <p className="text-md mt-1 uppercase">{product.productCategory } : {product.productFor} </p>
                     <div className="flex justify-between mx-6 mt-4 py-4 border-t border-gray-400">
                         {isInCartList ? (
                             <Link href={"/cart"}>

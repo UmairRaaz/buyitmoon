@@ -105,6 +105,8 @@ const ProductPage = () => {
               productPrice={product.productPrice}
               productId={product._id}
               productRating={product.productRating}
+              productCategory={product.productCategory}
+              productFor={product.productFor}
             />
           ))}
       </div>

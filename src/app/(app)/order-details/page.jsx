@@ -7,7 +7,10 @@ import { useEffect, useState } from "react";
 const OrderDetails = () => {
     const [orders, setOrders] = useState([]);
     const [userDetails, setUserDetails] = useState({});
-    console.log("orders", orders)
+    const [loading, setLoading] = useState(true);
+
+    console.log("orders", orders);
+
     const getUserDetails = async () => {
         try {
             const response = await axios.get("/api/isAdmin");
@@ -25,15 +28,21 @@ const OrderDetails = () => {
                     userEmail: userDetails.email
                 });
                 console.log(response.data);
-                setOrders(response.data.orders); 
+                setOrders(response.data.orders);
             }
         } catch (error) {
             console.error("Failed to fetch order details:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
     useEffect(() => {
-        getUserDetails();
+        const fetchDetails = async () => {
+            setLoading(true);
+            await getUserDetails();
+        };
+        fetchDetails();
     }, []);
 
     useEffect(() => {
@@ -42,8 +51,12 @@ const OrderDetails = () => {
         }
     }, [userDetails]);
 
-    if (!orders.length) {
+    if (loading) {
         return <div className="h-screen w-full flex items-center justify-center mt-20">Loading...</div>;
+    }
+
+    if (!loading && orders.length === 0) {
+        return <div className="h-screen w-full flex items-center justify-center mt-20">No Orders</div>;
     }
 
     return (
@@ -68,6 +81,7 @@ const OrderDetails = () => {
                                     <p><strong>Price:</strong> Rs {product.price}</p>
                                     <p><strong>Quantity:</strong> {product.quantity}</p>
                                     <p><strong>Total:</strong> Rs {product.price * product.quantity}</p>
+                                    <p className="text-md mt-1 uppercase">{product.productCategory } : {product.productFor} </p>
                                 </div>
                             </div>
                         ))}

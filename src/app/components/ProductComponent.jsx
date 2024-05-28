@@ -13,6 +13,8 @@ const ProductComponent = ({
   productName,
   productPrice,
   productRating,
+  productCategory,
+  productFor
 }) => {
   const { productData, wishlist, setWishlist, cart, setCart } =
     useContext(ProductContext);
@@ -50,11 +52,11 @@ const ProductComponent = ({
   );
   return (
     <div className=" w-64 shadow-xl rounded-2xl flex flex-col cursor-pointer"
-      
+
     >
       <div
-      onClick={() => router.push(`/product/${productId}`)}
-      className="w-full">
+        onClick={() => router.push(`/product/${productId}`)}
+        className="w-full">
         <Image
           src={productImage}
           alt="product-image"
@@ -75,7 +77,7 @@ const ProductComponent = ({
           </span>
           <span className="text-sm text-gray-700">Rating</span>
         </div>
-        <p className="text-md">Company</p>
+        <p className="text-md mt-1 uppercase">{productCategory } : {productFor} </p>
       </div>
       <div className="flex justify-between mx-6  mt-4 py-4 border-t border-gray-400">
         {isInCartList ? (

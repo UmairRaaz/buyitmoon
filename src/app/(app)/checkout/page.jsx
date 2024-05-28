@@ -19,6 +19,7 @@ const Page = () => {
     phoneNumber: "",
     address: ""
   })
+  console.log("checkout-cart", cartItem)
   const totalPrice = cartItem?.reduce((total, item) => {
     // Multiply the price by the quantity for each item and add to the total
     return total + item.price * item.quantity;
@@ -52,7 +53,7 @@ const Page = () => {
       localStorage.removeItem("wishlist");
       localStorage.removeItem("cart");
       localStorage.removeItem("cartItem");
-      router.replace("/ordercomplete")
+      router.replace("/order-details")
     }
   }
   useEffect(() => {

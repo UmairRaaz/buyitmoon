@@ -55,6 +55,8 @@ const CartProducts = ({
         price: cartProduct?.productPrice,
         name: cartProduct?.productName,
         image: cartProduct?.productImage,
+        productCategory : cartProduct?.productCategory,
+        productFor : cartProduct?.productFor ,
         quantity: 1, // Default quantity of 1 for each item
       });
     });

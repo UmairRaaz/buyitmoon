@@ -6,6 +6,7 @@ import CartProducts from "../../components/CartProducts";
 import Image from "next/image";
 const WishListPage = () => {
   const { cart, cartItem } = useContext(ProductContext);
+  console.log("cartItem", cartItem);
   console.log("cart", cart);
   
 

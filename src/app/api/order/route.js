@@ -3,22 +3,24 @@ const { Order } = require("@/models/orderModel");
 import { NextRequest, NextResponse } from "next/server";
 connect()
 
-export async function POST(NextRequest){
+export async function POST(req){
     try {
-        const orderBody = await NextRequest.json()
+        const orderBody = await req.json()
+        // console.log("order", orderBody)
         const sanitizedCartItems = orderBody.cartItem.map(item => {
             const {  ...rest } = item; 
             return rest; 
         });
-        // console.log(sanitizedCartItems)
+        console.log("order",sanitizedCartItems)
         const sanitizedOrderBody = {
             customer: orderBody.customerData,
             products: sanitizedCartItems,
             totalBill: orderBody.totalPrice,
             deliveryCharges: 0,
         };
+        console.log(sanitizedOrderBody)
         const newOrder = await Order.create(sanitizedOrderBody) 
-        console.log(newOrder)
+        // console.log(newOrder)
         return NextResponse.json({message : "order placed successfully",  success : true}, {status: 200})
     } catch (error) {
         console.log(error)
